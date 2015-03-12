@@ -1,16 +1,12 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 
 
 ## Loading and preprocessing the data
 
-```{r}
+
+```r
 #create temporary directory and placeholder file
 td <- tempdir() 
 tf <- tempfile(tmpdir=td, fileext=".zip")  
@@ -38,26 +34,32 @@ activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 ## What is mean total number of steps taken per day?
 
 #### Record the total steps per day in the variable steps.per.day
-```{r}
+
+```r
 steps.per.day <- tapply(activity$steps, activity$date, sum, na.rm=T)
 ```
 
 #### Make a histogram of the total steps per day
-```{r}
+
+```r
 hist(steps.per.day)
 ```
 
-```{r}
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+
+
+```r
 daily.steps.mean <- round(mean(steps.per.day))
 daily.steps.median <- median(steps.per.day)
 ```
 
-The mean total number of steps taken per day is `r daily.steps.mean`.  
-The median total number of steps taken per day is `r daily.steps.median`.
+The mean total number of steps taken per day is 9354.  
+The median total number of steps taken per day is 10395.
 
 ## What is the average daily activity pattern?
 #### Make a line plot of the daily average steps for each time interval
-```{r}
+
+```r
 interval.mean <- aggregate(steps ~ interval, activity, mean, na.rm=T)
 plot(interval.mean$interval, interval.mean$steps, type="l", 
      main = "Mean Number Of Steps For Each Interval", 
@@ -65,11 +67,14 @@ plot(interval.mean$interval, interval.mean$steps, type="l",
      ylab = "Mean Number Of Steps")
 ```
 
-```{r}
-```{r}
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+
+
+
+```r
 interval.max <- interval.mean$interval[which.max(interval.mean$steps)]
 ```
-Interval number `r interval.max` had the highest daily average number of steps.
+Interval number 835 had the highest daily average number of steps.
 
 
 
